@@ -16,3 +16,6 @@ Teamspeak 3 server for ARM64 using Box64 Emulator image
 
 #### egg-terraria-vanilla-ARM64.json [ARM64]
 Terraria vanilla egg for ARM64 running with mono
+
+### egg-vanilla-bedrock.json [ARM64]
+Bedrock vanilla egg for ARM64 using box64 (Works but slow startup)
