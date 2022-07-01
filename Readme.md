@@ -15,4 +15,4 @@ Muble server latest 1.4 version
 Teamspeak 3 server for ARM64 using Box64 Emulator image
 
 #### egg-terraria-vanilla-ARM64.json
-Terraria vanillia egg running with mono
+Terraria vanilla egg for ARM64 running with mono
