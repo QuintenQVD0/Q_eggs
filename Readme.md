@@ -19,3 +19,6 @@ Terraria vanilla egg for ARM64 running with mono
 
 ### egg-vanilla-bedrock.json [ARM64]
 Bedrock vanilla egg for ARM64 using box64 (Works but slow startup)
+
+### egg-tshock-ARM64.json [ARM64]
+Terraria tsock egg for ARM64 running with mono
