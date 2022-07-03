@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-03T21:03:55+02:00",
+    "exported_at": "2022-07-03T21:05:56+02:00",
     "name": "tshock V1.4+ ARM64",
     "author": "josdekurk@gmail.com",
     "description": "The t-shock modded terraria server.\r\n\r\nhttps:\/\/tshock.co\/",
@@ -16,7 +16,7 @@
     "startup": "mono TerrariaServer.exe -ip 0.0.0.0 -port {{SERVER_PORT}} -maxplayers {{MAX_PLAYERS}} -world {{WORLD_NAME}}.wld -autocreate {{WORLD_SIZE}}",
     "config": {
         "files": "{\r\n    \"tshock\/config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {}\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\"\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"ServerLog.txt\"\r\n}",
         "stop": "exit"
     },
