@@ -1,27 +1,19 @@
 # Q_eggs
-Some custom eggs and some special made for arm64
+Custom eggs for [pterodactyl.io](https://pterodactyl.io). 
+Some of them work on ARM 9and also ARM form [Oracle Free Tier](https://www.youtube.com/watch?v=g7sP33QtuxM))
 
-#### egg-gogs.json [ARM64,AMD64]
-A painless self-hosted Git service.
-https://gogs.io/
+| Service | file* | AMD64 | ARM | ARM Oracle | More info |
+|--|--|--|--|--|--|
+| Gogs | [egg-gogs.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-gogs.json) | ✅ | ✅ | ❔ |
+| Mumble server 1.3 | [egg-mumble-server1.3.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-mumble-server1.3.json) | ✅ | ❌ | ❌ |
+| Mumble server 1.4| [egg-mumble-server1.4.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-mumble-server1.4.json) | ✅ | ❌ | ❌ |
+| TeamSpeak3| [egg-teamspeak3-server-ARM64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-teamspeak3-server-ARM64.json) | ❔ | ✅ | ✅ |
+| Terraria Vanilla| [egg-terraria-vanilla-ARM64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-terraria-vanilla-ARM64.json) | ❔ | ✅ | ❔ |
+| Bedrock Vanilla| [egg-vanilla-bedrock.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-vanilla-bedrock.json) | ❔ | ✅ | ✅ | Works but slow startup |
+| Terraria tShock| [egg-tshock-ARM64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-tshock-ARM64.json) | ❌ | ✅ | ✅ | running with mono |
+| beamMP| [egg-beamMP-servers-ARM64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-beamMP-servers-ARM64.json) | ❔ | ✅ | ✅ |  |
 
-#### egg-mumble-server1.3.json [AMD64]
-Mumble server all version 1.3.x
-
-#### egg-mumble-server1.4.json [AMD64]
-Muble server latest 1.4 version
-
-#### egg-teamspeak3-server-ARM64.json [ARM64]
-Teamspeak 3 server for ARM64 using Box64 Emulator image
-
-#### egg-terraria-vanilla-ARM64.json [ARM64]
-Terraria vanilla egg for ARM64 running with mono
-
-### egg-vanilla-bedrock.json [ARM64]
-Bedrock vanilla egg for ARM64 using box64 (Works but slow startup)
-
-### egg-tshock-ARM64.json [ARM64]
-Terraria tsock egg for ARM64 running with mono
-
-### egg-beamMP servers on ARM64.json [ARM64]
-beamMP server running on ARM64
+*Right click and click save  
+✅ - Working (Normal ARM was tested on Raspberry Pi)  
+❔- Not tested yet but should work  
+❌ - Don't work  
