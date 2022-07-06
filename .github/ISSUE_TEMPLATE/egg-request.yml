@@ -40,3 +40,13 @@ body:
       placeholder: Install the server, start it, play
     validations:
       required: true
+  - type: dropdown
+    id: ARM
+    attributes:
+      label: Does this app work on ARM?
+      options:
+        - "I don't know"
+        - "Yes"
+        - "No"
+    validations:
+      required: true
