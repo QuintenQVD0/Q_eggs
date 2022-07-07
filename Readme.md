@@ -1,6 +1,6 @@
 # Q_eggs
 Custom eggs for [pterodactyl.io](https://pterodactyl.io). 
-Some of them work on ARM 9and also ARM form [Oracle Free Tier](https://www.youtube.com/watch?v=g7sP33QtuxM))
+Some of them work on ARM and also ARM form [Oracle Free Tier](https://www.youtube.com/watch?v=g7sP33QtuxM))
 
 | Service | file* | AMD64 | ARM | ARM Oracle | More info |
 |--|--|--|--|--|--|
