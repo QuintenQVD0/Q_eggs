@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-11T09:30:03+02:00",
+    "exported_at": "2022-07-11T10:04:41+02:00",
     "name": "BeamMP Servers on ARM64",
     "author": "josdekurk@gmail.com",
     "description": "This is the server for the multiplayer mod BeamMP for the game BeamNG.drive. The server is the point throug which all clients communicate. You can write lua mods for the server, detailed instructions on the BeamMP Wiki.",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\napt update\r\n\r\nrm BeamMP-Server\r\n\r\napt-get install -y tar curl jq file ca-certificates build-essential\r\napt-get install -y zlib1g-dev rapidjson-dev liblua5.3-dev libssl-dev libwebsocketpp-dev libcurl4-openssl-dev git make cmake g++ openssl\r\n\r\n\r\ngit clone https:\/\/github.com\/BeamMP\/BeamMP-Server\r\ncd BeamMP-Server\/\r\ngit reset --hard 28270072\r\ngit checkout tags\/v3.0.1\r\ngit submodule update --init --recursive\r\ncmake . -DCMAKE_BUILD_TYPE=Release\r\nmake\r\n\r\nmv BeamMP-Server BeamMP.bin\r\nmv BeamMP.bin \/mnt\/server\r\ncd \/mnt\/server\r\nrm -rf BeamMP-Server\/\r\nmv BeamMP.bin BeamMP-Server\r\nchmod +x BeamMP-Server\r\n\r\necho \"# This is the BeamMP Server Configuration File v0.60\r\nDebug = false # true or false to enable debug console output\r\nPrivate = true # Private?\r\nPort = 30814 # Port to run the server on UDP and TCP\r\nCars = 1 # Max cars for every player\r\nMaxPlayers = 10 # Maximum Amount of Clients\r\nMap = \\\"\/levels\/gridmap\/info.json\\\" # Default Map\r\nName = \\\"BeamMP New Server\\\" # Server Name\r\nDesc = \\\"BeamMP Default Description\\\" # Server Description\r\nuse = \\\"Resources\\\" # Resource file name\r\nAuthKey = \\\"\\\" # Auth Key\" > ServerConfig.toml\r\n\r\necho \"done\"",
+            "script": "#!\/bin\/bash\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\napt update\r\n\r\nrm BeamMP-Server\r\n\r\napt-get install -y tar curl jq file ca-certificates build-essential\r\napt-get install -y zlib1g-dev rapidjson-dev liblua5.3-dev libssl-dev libwebsocketpp-dev libcurl4-openssl-dev git make cmake g++ openssl\r\n\r\n\r\ngit clone https:\/\/github.com\/BeamMP\/BeamMP-Server\r\ncd BeamMP-Server\/\r\n#git reset --hard 28270072\r\nif [ \"${VERSION}\" == \"v3.0.1\" ]; then\r\n    echo \"v3.0.1\"\r\n    git reset --hard 28270072;\r\nelse\r\n    echo ${VERSION};\r\nfi\r\ngit checkout tags\/${VERSION}\r\ngit submodule update --init --recursive\r\ncmake . -DCMAKE_BUILD_TYPE=Release\r\nmake\r\n\r\nmv BeamMP-Server BeamMP.bin\r\nmv BeamMP.bin \/mnt\/server\r\ncd \/mnt\/server\r\nrm -rf BeamMP-Server\/\r\nmv BeamMP.bin BeamMP-Server\r\nchmod +x BeamMP-Server\r\n\r\nif [ -f \"ServerConfig.toml\" ]\r\nthen\r\necho \"config file is found\"\r\nelse\r\necho \"config file is not found --> making one!\"\r\n   echo \"# This is the BeamMP Server Configuration File v0.60\r\n   Debug = false # true or false to enable debug console output\r\n   Private = true # Private?\r\n   Port = 30814 # Port to run the server on UDP and TCP\r\n   Cars = 1 # Max cars for every player\r\n   MaxPlayers = 10 # Maximum Amount of Clients\r\n   Map = \\\"\/levels\/gridmap\/info.json\\\" # Default Map\r\n   Name = \\\"BeamMP New Server\\\" # Server Name\r\n   Desc = \\\"BeamMP Default Description\\\" # Server Description\r\n   use = \\\"Resources\\\" # Resource file name\r\n   AuthKey = \\\"\\\" # Auth Key\" > ServerConfig.toml\r\nfi\r\n\r\n\r\necho \"done\"",
             "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
@@ -30,12 +30,12 @@
     "variables": [
         {
             "name": "Version to install",
-            "description": "See all versions visit https:\/\/github.com\/BeamMP\/BeamMP-Server\/releases\r\n\r\nLatest wont work!",
+            "description": "See all versions visit https:\/\/github.com\/BeamMP\/BeamMP-Server\/releases",
             "env_variable": "VERSION",
             "default_value": "v3.0.2",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:16",
+            "rules": "required|string|in:v3.0.2,v3.0.1",
             "field_type": "text"
         },
         {
