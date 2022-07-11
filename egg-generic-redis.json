@@ -1,0 +1,52 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-07-11T13:56:50+02:00",
+    "name": "Generic redis",
+    "author": "josdekurk@gmail.com",
+    "description": "Redis\r\n\r\nThe open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/redis-server --port {{SERVER_PORT}} --bind 0.0.0.0 --maxmemory {{SERVER_MEMORY}}mb --dir \/home\/container\/ --requirepass {{SERVER_PASSWORD}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Ready to accept connections\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\napt update\r\nrm redis-server\r\napt-get install -y tar curl jq file ca-certificates build-essential wget pkg-config\r\napt-get install -y libssl-dev libcurl4-openssl-dev git make cmake g++ openssl\r\n\r\ngit clone https:\/\/github.com\/redis\/redis -b ${VERSION}\r\ncd redis\/\r\nmake BUILD_TLS=yes\r\nmv src\/redis-server \/mnt\/server\r\ncd \/mnt\/server\r\nrm -rf redis\/\r\ncd \/mnt\/server\r\nchmod +x redis-server\r\n#wget https:\/\/raw.githubusercontent.com\/redis\/redis\/${VERSION}\/redis.conf\r\necho \"done\"",
+            "container": "debian:bullseye-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "VERSION",
+            "description": "The redis version you need",
+            "env_variable": "VERSION",
+            "default_value": "7.0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:5|in:5.0,6.0,6.2,7.0",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "The server Password",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "P@55w0rd!!",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
