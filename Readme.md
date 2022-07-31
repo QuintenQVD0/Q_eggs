@@ -5,8 +5,7 @@ Some of them work on ARM and also ARM form Oracle Free Tier
 | Service | file* | AMD64 | ARM64 | ARM Oracle | More info |
 |--|--|--|--|--|--|
 | Gogs | [egg-gogs.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-gogs.json) | ✅ | ✅ | ✅ | Not ssl ready and on ARM use native ARM version
-| Mumble server 1.3 | [egg-mumble-server1.3.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-mumble-server1.3.json) | ✅ | ❌ | ❌ |
-| Mumble server 1.4 | [egg-mumble-server1.4.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-mumble-server1.4.json) | ✅ | ❌ | ❌ |
+| Mumble server 1.3.x-1.4.x | [egg-mumble-server-1-3-x-1-4-x.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-mumble-server-1-3-x-1-4-x.json) | ✅ | ❌ | ❌ |
 | TeamSpeak3| [egg-teamspeak3-server-ARM64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-teamspeak3-server-ARM64.json) | ❌ | ✅ | ✅ |
 | Terraria Vanilla | [egg-terraria-vanilla-ARM64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-terraria-vanilla-ARM64.json) | ❌ | ✅ | ✅ |
 | Bedrock Vanilla | [egg-vanilla-bedrock.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-vanilla-bedrock.json) | ❌ | ✅ | ✅ | Works but slow startup |
