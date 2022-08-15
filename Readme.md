@@ -14,6 +14,7 @@ Some of them work on ARM and also ARM form Oracle Free Tier
 | Among Us - Impostor Server | [egg-among-us--impostor-server.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-among-us--impostor-server.json) | ✅ | ✅ | ✅ | You MUST use Port 22023 for the Master Server. To host multiple servers, please read [Impostor Multiple Servers Documentation](https://github.com/Impostor/Impostor/blob/master/docs/Running-the-server.md#multiple-servers). 
 | Redis server generic | [egg-generic-redis.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-generic-redis.json) | ✅ | ✅ | ✅ | supports: v5.0,6.0,6.2,7.0 |
 | SA-MP | [egg-s-a--m-p.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-s-a--m-p.json) | ✅ | ✅ | ✅ | Uses box86 emulation
+| TmodLoader | [egg-t-mod-loader-a-r-m.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-t-mod-loader-a-r-m.json) | ❔ | ✅ | ✅ | Runs windows version with mono
 *Right click and click save  
 
 ✅ - Working (Normal ARM was tested on Raspberry Pi)  
