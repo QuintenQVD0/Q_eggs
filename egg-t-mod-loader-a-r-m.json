@@ -10,7 +10,7 @@
     "description": "tModLoader for Terraria base by Ashu and fixted bij QuintenQVD0",
     "features": null,
     "docker_images": {
-        "quintenqvd\/pterodactyl_images:mono": "quintenqvd\/pterodactyl_images:mono"
+        "quintenqvd\/pterodactyl_images:mono_latest": "quintenqvd\/pterodactyl_images:mono_latest"
     },
     "file_denylist": [],
     "startup": "mono .\/tModLoader64bitServer.exe -ip 0.0.0.0 -port ${SERVER_PORT} -maxplayers ${MAX_PLAYERS} -difficulty ${DIFFICULTY} -password \"${SERVER_PASSWORD}\" -motd \"${MOTD}\" -world ~\/Worlds\/${WORLD_NAME}.wld -worldname ${WORLD_NAME} -autocreate ${WORLD_SIZE} -savedirectory ~\/ -tmlsavedirectory ~\/saves -modpath ~\/Mods",

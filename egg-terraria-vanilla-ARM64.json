@@ -10,7 +10,7 @@
     "description": "Dig, fight, explore, build! Nothing is impossible in this action-packed adventure game.",
     "features": null,
     "docker_images": {
-        "quintenqvd\/pterodactyl_images:mono": "quintenqvd\/pterodactyl_images:mono"
+        "quintenqvd\/pterodactyl_images:mono_latest": "quintenqvd\/pterodactyl_images:mono_latest"
     },
     "file_denylist": [],
     "startup": "mono --server --gc=sgen -O=all .\/TerrariaServer.exe -config serverconfig.txt",
