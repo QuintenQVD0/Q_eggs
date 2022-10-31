@@ -14,7 +14,7 @@ Some of them work on ARM and also ARM form Oracle Free Tier
 | Redis server generic | [egg-generic-redis.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-generic-redis.json) | ✅ | ✅ | ✅ | supports: v5.0,6.0,6.2,7.0 |
 | SA-MP | [egg-s-a--m-p.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-s-a--m-p.json) | ✅ | ✅ | ✅ | Uses box86 emulation
 | TmodLoader | [egg-t-mod-loader-a-r-m.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-t-mod-loader-a-r-m.json) | ❔ | ✅ | ✅ | Runs windows version with mono
-| OpenWorld | [egg-open-world.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-open-world.json) | ✅ | ✅ | ✅ | Difrend docker image for ARM64 then for AMD64 and **needs a reinstall after changing the primary port! (remove old config first then reinstall) + only currently support up to version 1.3.9** | 
+| OpenWorld | [egg-open-world.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-open-world.json) | ✅ | ✅ | ✅ | Difrend docker image for ARM64 then for AMD64 and **needs a reinstall after changing the primary port! (remove old config first then reinstall)** | 
 
 *Right click and click save  
 
