@@ -1,62 +1,101 @@
 {
-    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
-    "meta": {
-        "version": "PTDL_v2",
-        "update_url": null
-    },
-    "exported_at": "2022-07-11T11:07:16+02:00",
-    "name": "BeamMP Servers on ARM64",
-    "author": "josdekurk@gmail.com",
-    "description": "This is the server for the multiplayer mod BeamMP for the game BeamNG.drive. The server is the point throug which all clients communicate. You can write lua mods for the server, detailed instructions on the BeamMP Wiki.",
-    "features": null,
-    "docker_images": {
-        "quintenqvd\/pterodactyl_images:debian": "quintenqvd\/pterodactyl_images:debian"
-    },
-    "file_denylist": [],
-    "startup": ".\/BeamMP-Server",
-    "config": {
-        "files": "{\r\n    \"ServerConfig.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"MaxPlayers\": \"MaxPlayers = {{server.build.env.MAX_PLAYER}}\",\r\n            \"Port\": \"Port = {{server.build.default.port}}\",\r\n            \"AuthKey =\": \"AuthKey = \\\"{{server.build.env.AUTH}}\\\"\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"[INFO] Vehicle data network online\"\r\n}",
-        "logs": "{}",
-        "stop": "^C"
-    },
-    "scripts": {
-        "installation": {
-            "script": "#!\/bin\/bash\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\napt update\r\n\r\nrm BeamMP-Server\r\n\r\napt-get install -y tar curl jq file ca-certificates build-essential\r\napt-get install -y zlib1g-dev rapidjson-dev liblua5.3-dev libssl-dev libwebsocketpp-dev libcurl4-openssl-dev git make cmake g++ openssl\r\n\r\n\r\ngit clone https:\/\/github.com\/BeamMP\/BeamMP-Server\r\ncd BeamMP-Server\/\r\n#git reset --hard 28270072\r\nif [ \"${VERSION}\" == \"v3.0.1\" ]; then\r\n    echo \"v3.0.1\"\r\n    git reset --hard 28270072;\r\nelse\r\n    echo ${VERSION};\r\nfi\r\ngit checkout tags\/${VERSION}\r\ngit submodule update --init --recursive\r\ncmake . -DCMAKE_BUILD_TYPE=Release\r\nmake\r\n\r\nmv BeamMP-Server BeamMP.bin\r\nmv BeamMP.bin \/mnt\/server\r\ncd \/mnt\/server\r\nrm -rf BeamMP-Server\/\r\nmv BeamMP.bin BeamMP-Server\r\nchmod +x BeamMP-Server\r\n\r\nif [ -f \"ServerConfig.toml\" ]\r\nthen\r\necho \"config file is found\"\r\nelse\r\necho \"config file is not found --> making one!\"\r\n   echo \"# This is the BeamMP Server Configuration File v0.60\r\n   Debug = false # true or false to enable debug console output\r\n   Private = true # Private?\r\n   Port = 30814 # Port to run the server on UDP and TCP\r\n   Cars = 1 # Max cars for every player\r\n   MaxPlayers = 10 # Maximum Amount of Clients\r\n   Map = \\\"\/levels\/gridmap_v2\/info.json\\\" # Default Map\r\n   Name = \\\"BeamMP New Server\\\" # Server Name\r\n   Desc = \\\"BeamMP Default Description\\\" # Server Description\r\n   use = \\\"Resources\\\" # Resource file name\r\n   AuthKey = \\\"\\\" # Auth Key\" > ServerConfig.toml\r\nfi\r\n\r\n\r\necho \"done\"",
-            "container": "debian:bullseye-slim",
-            "entrypoint": "bash"
-        }
-    },
-    "variables": [
-        {
-            "name": "Version to install",
-            "description": "See all versions visit https:\/\/github.com\/BeamMP\/BeamMP-Server\/releases",
-            "env_variable": "VERSION",
-            "default_value": "v3.0.2",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|in:v3.0.2,v3.0.1",
-            "field_type": "text"
-        },
-        {
-            "name": "Authentication Key",
-            "description": "BeamMP Server Key (https:\/\/beamng-mp.com\/k\/keys)",
-            "env_variable": "AUTH",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:50",
-            "field_type": "text"
-        },
-        {
-            "name": "Max Players",
-            "description": "The maximum number of allowed players",
-            "env_variable": "MAX_PLAYER",
-            "default_value": "6",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer|max:32",
-            "field_type": "text"
-        }
-    ]
+	"_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+	"meta": {
+		"version": "PTDL_v2",
+		"update_url": null
+	},
+	"exported_at": "2022-10-31T11:24:02+01:00",
+	"name": "BeamMP Servers on ARM64",
+	"author": "josdekurk@gmail.com",
+	"description": "This is the server for the multiplayer mod BeamMP for the game BeamNG.drive. The server is the point throug which all clients communicate. You can write lua mods for the server, detailed instructions on the BeamMP Wiki.",
+	"features": null,
+	"docker_images": {
+		"Debian": "ghcr.io\/parkervcp\/yolks:debian"
+	},
+	"file_denylist": [],
+	"startup": ".\/BeamMP-Server",
+	"config": {
+		"files": "{\r\n    \"ServerConfig.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Name =\": \"Name = \\\"{{env.NAME}}\\\"\",\r\n            \"Port =\": \"Port = {{server.build.default.port}}\",\r\n            \"AuthKey =\": \"AuthKey = \\\"{{env.AUTHKEY}}\\\"\",\r\n            \"Private =\": \"Private = {{env.PRIVATE}}\",\r\n            \"MaxPlayers =\": \"MaxPlayers = {{server.build.env.MAX_PLAYERS}}\",\r\n            \"Description =\": \"Description = \\\"{{env.NAME}}\\\"\",\r\n            \"MaxCars =\": \"MaxCars = {{env.MAX_CARS}}\",\r\n            \"Map =\": \"Map = \\\"{{env.MAP}}\\\"\"\r\n        }\r\n    }\r\n}",
+		"startup": "{\r\n    \"done\": \"[INFO] Vehicle data network online\"\r\n}",
+		"logs": "{}",
+		"stop": "^C"
+	},
+	"scripts": {
+		"installation": {
+			"script": "#!\/bin\/bash\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\napt update\r\n\r\nrm BeamMP-Server\r\n\r\napt-get install -y tar curl jq file ca-certificates build-essential\r\napt-get install -y zlib1g-dev rapidjson-dev liblua5.3-dev libssl-dev libwebsocketpp-dev libcurl4-openssl-dev git make cmake g++ openssl libboost1.74-all-dev\r\n\r\n\r\ngit clone https:\/\/github.com\/BeamMP\/BeamMP-Server\r\ncd BeamMP-Server\/\r\n#git reset --hard 28270072\r\nif [ \"${VERSION}\" == \"v3.0.1\" ]; then\r\n    echo \"v3.0.1\"\r\n    git reset --hard 28270072;\r\nelse\r\n    echo ${VERSION};\r\nfi\r\ngit checkout tags\/${VERSION}\r\ngit submodule update --init --recursive\r\ncmake . -DCMAKE_BUILD_TYPE=Release\r\nmake\r\n\r\nmv BeamMP-Server BeamMP.bin\r\nmv BeamMP.bin \/mnt\/server\r\ncd \/mnt\/server\r\nrm -rf BeamMP-Server\/\r\nmv BeamMP.bin BeamMP-Server\r\nchmod +x BeamMP-Server\r\n\r\nif [ -f \"ServerConfig.toml\" ]\r\nthen\r\necho \"config file is found\"\r\nelse\r\necho \"config file is not found --> making one!\"\r\n   echo \"# This is the BeamMP Server Configuration File v0.60\r\n   Debug = false # true or false to enable debug console output\r\n   Private = true # Private?\r\n   Port = 30814 # Port to run the server on UDP and TCP\r\n   Cars = 1 # Max cars for every player\r\n   MaxPlayers = 10 # Maximum Amount of Clients\r\n   Map = \\\"\/levels\/gridmap_v2\/info.json\\\" # Default Map\r\n   Name = \\\"BeamMP New Server\\\" # Server Name\r\n   Desc = \\\"BeamMP Default Description\\\" # Server Description\r\n   use = \\\"Resources\\\" # Resource file name\r\n   AuthKey = \\\"\\\" # Auth Key\" > ServerConfig.toml\r\nfi\r\n\r\n\r\necho \"done\"",
+			"container": "debian:bullseye-slim",
+			"entrypoint": "bash"
+		}
+	},
+	"variables": [{
+			"name": "Version to install",
+			"description": "See all versions visit https:\/\/github.com\/BeamMP\/BeamMP-Server\/releases",
+			"env_variable": "VERSION",
+			"default_value": "v3.1.0",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|string|in:v3.0.2,v3.0.1,v3.1.0",
+			"field_type": "text"
+		},
+		{
+			"name": "Authentication Key",
+			"description": "BeamMP Server Key (https:\/\/beamng-mp.com\/k\/keys)",
+			"env_variable": "AUTH",
+			"default_value": "",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|string|max:50",
+			"field_type": "text"
+		},
+		{
+			"name": "Max Players",
+			"description": "The maximum number of allowed players",
+			"env_variable": "MAX_PLAYER",
+			"default_value": "6",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|integer|max:32",
+			"field_type": "text"
+		},
+		{
+			"name": "Server Name",
+			"description": "The name of your server. This is what appears on the server list.",
+			"env_variable": "NAME",
+			"default_value": "BeamMP Server",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|string|max:64",
+			"field_type": "text"
+		},
+		{
+			"name": "Private",
+			"description": "Should the server be private?",
+			"env_variable": "PRIVATE",
+			"default_value": "false",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|string",
+			"field_type": "text"
+		},
+		{
+			"name": "Max Cars",
+			"description": "The maximum number of cars allowed to be spawned per player.",
+			"env_variable": "MAX_CARS",
+			"default_value": "1",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|integer|max:4",
+			"field_type": "text"
+		},
+		{
+			"name": "Map",
+			"description": "The map for your server. Stock maps are listed below.\r\n\r\n\/levels\/gridmap_v2\/info.json\r\n\/levels\/automation_test_track\/info.json\r\n\/levels\/east_coast_usa\/info.json\r\n\/levels\/hirochi_raceway\/info.json\r\n\/levels\/italy\/info.json\r\n\/levels\/jungle_rock_island\/info.json\r\n\/levels\/industrial\/info.json\r\n\/levels\/small_island\/info.json\r\n\/levels\/smallgrid\/info.json\r\n\/levels\/utah\/info.json\r\n\/levels\/west_coast_usa\/info.json\r\n\/levels\/driver_training\/info.json\r\n\/levels\/derby\/info.json",
+			"env_variable": "MAP",
+			"default_value": "\/levels\/gridmap_v2\/info.json",
+			"user_viewable": true,
+			"user_editable": true,
+			"rules": "required|string|max:64",
+			"field_type": "text"
+		}
+	]
 }
