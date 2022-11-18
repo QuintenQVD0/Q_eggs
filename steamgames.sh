@@ -5,10 +5,16 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
+if [[ $FREE -lt 10485760 ]]; then
+     echo "to litte disk space, you need at least 10G"
+     exit
+fi;
+
 echo "making temp dir $(pwd)/temp"
 STARTDIR=($(pwd)/temp)
 mkdir -p $(pwd)/temp
 
+cd $(pwd)/temp
 echo "installing packages that are needed"
 sudo apt install -y git curl cmake gcc-arm-linux-gnueabihf sudo
 sudo dpkg --add-architecture armhf && apt-get update
