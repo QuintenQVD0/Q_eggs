@@ -23,6 +23,7 @@ echo "installing box86"
 sudo make install
 echo "restarting binfmt"
 sudo systemctl restart systemd-binfmt
+box86 --version
 cd ${STARTDIR}
 rm -rf box86/
 echo "cloning box86"
@@ -35,6 +36,7 @@ echo "installing box64"
 sudo make install
 echo "restarting binfmt"
 sudo systemctl restart systemd-binfmt
+box64 --version
 cd ${STARTDIR}
 rm -rf box64/
 echo "install done"
