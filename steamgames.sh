@@ -5,10 +5,6 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-if [[ $FREE -lt 10485760 ]]; then
-     echo "to litte disk space, you need at least 10G"
-     exit
-fi;
 
 echo "making temp dir $(pwd)/temp"
 STARTDIR=($(pwd)/temp)
