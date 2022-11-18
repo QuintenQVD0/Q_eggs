@@ -15,9 +15,16 @@ Some of them work on ARM and also ARM form Oracle Free Tier
 | SA-MP | [egg-s-a--m-p.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-s-a--m-p.json) | ✅ | ✅ | ✅ | Uses box86 emulation
 | TmodLoader | [egg-t-modloader.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-t-modloader.json) | ✅ | ✅ | ✅ | Difrend image for AMD64 then ARM64
 | OpenWorld | [egg-open-world.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-open-world.json) | ✅ | ✅ | ✅ | Difrend docker image for ARM64 then for AMD64 and **needs a reinstall after changing the primary port! (remove old config first then reinstall)** | 
+| Counter strike global offensive | [egg-counter--strike--global-offensive.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-counter--strike--global-offensive.json) | ❌ | ✅ | ❔ | !!STEAMCMD!! |
 
 *Right click and click save  
 
 ✅ - Working (Normal ARM was tested on Raspberry Pi)  
 ❔- Not tested yet but should work  
 ❌ - Don't work 
+
+## SteamCMD
+if **!!STEAMCMD!!** is mentioned in the egg more info then you have to run this the first time you install a steam game **on the host OS!**
+```sh
+curl -sSL https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/steamgames.sh | bash
+```
