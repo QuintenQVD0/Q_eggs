@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-22T07:04:53+01:00",
+    "exported_at": "2022-11-22T07:07:21+01:00",
     "name": "BeamMP Servers on ARM64",
     "author": "josdekurk@gmail.com",
     "description": "This is the server for the multiplayer mod BeamMP for the game BeamNG.drive. The server is the point throug which all clients communicate. You can write lua mods for the server, detailed instructions on the BeamMP Wiki.",
@@ -59,8 +59,8 @@
             "field_type": "text"
         },
         {
-            "name": "Server Name",
-            "description": "The name of your server. This is what appears on the server list.",
+            "name": "Server Description",
+            "description": "The Description of your server. This is what appears on the server list.",
             "env_variable": "NAME",
             "default_value": "BeamMP Server",
             "user_viewable": true,
