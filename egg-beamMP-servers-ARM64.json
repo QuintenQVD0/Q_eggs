@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-21T19:22:41+01:00",
+    "exported_at": "2022-11-22T07:04:53+01:00",
     "name": "BeamMP Servers on ARM64",
     "author": "josdekurk@gmail.com",
     "description": "This is the server for the multiplayer mod BeamMP for the game BeamNG.drive. The server is the point throug which all clients communicate. You can write lua mods for the server, detailed instructions on the BeamMP Wiki.",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\napt update\r\n\r\nrm BeamMP-Server\r\n\r\napt-get install -y tar curl jq file ca-certificates build-essential\r\napt-get install -y zlib1g-dev rapidjson-dev liblua5.3-dev libssl-dev libwebsocketpp-dev libcurl4-openssl-dev git make cmake g++ openssl libboost1.74-all-dev\r\n\r\n\r\ngit clone https:\/\/github.com\/BeamMP\/BeamMP-Server.git\r\ncd BeamMP-Server\/\r\n#git reset --hard 28270072\r\nif [ \"${VERSION}\" == \"v3.0.1\" ]; then\r\n    echo \"v3.0.1\"\r\n    git reset --hard 28270072;\r\nelse\r\n    echo ${VERSION};\r\nfi\r\ngit checkout tags\/${VERSION}\r\ngit submodule update --init --recursive\r\ncmake . -DCMAKE_BUILD_TYPE=Release\r\nmake -j$(nproc)\r\n\r\nmv BeamMP-Server BeamMP.bin\r\nmv BeamMP.bin \/mnt\/server\r\ncd \/mnt\/server\r\nrm -rf BeamMP-Server\/\r\nmv BeamMP.bin BeamMP-Server\r\nchmod +x BeamMP-Server\r\n\r\nif [ -f \"ServerConfig.toml\" ]\r\nthen\r\necho \"config file is found\"\r\nelse\r\necho \"config file is not found --> making one!\"\r\n   curl -sSL -o ServerConfig.toml https:\/\/pteropaste.com\/du7ev5\r\nfi\r\n\r\n\r\necho \"done\"",
+            "script": "#!\/bin\/bash\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\napt update\r\n\r\nrm BeamMP-Server\r\n\r\napt-get install -y tar curl jq file ca-certificates build-essential\r\napt-get install -y zlib1g-dev rapidjson-dev liblua5.3-dev libssl-dev libwebsocketpp-dev libcurl4-openssl-dev git make cmake g++ openssl libboost1.74-all-dev\r\n\r\n\r\ngit clone https:\/\/github.com\/BeamMP\/BeamMP-Server.git\r\ncd BeamMP-Server\/\r\n#git reset --hard 28270072\r\nif [ \"${VERSION}\" == \"v3.0.1\" ]; then\r\n    echo \"v3.0.1\"\r\n    git reset --hard 28270072;\r\nelse\r\n    echo ${VERSION};\r\nfi\r\ngit checkout tags\/${VERSION}\r\ngit submodule update --init --recursive\r\ncmake . -DCMAKE_BUILD_TYPE=Release\r\nmake\r\n\r\nmv BeamMP-Server BeamMP.bin\r\nmv BeamMP.bin \/mnt\/server\r\ncd \/mnt\/server\r\nrm -rf BeamMP-Server\/\r\nmv BeamMP.bin BeamMP-Server\r\nchmod +x BeamMP-Server\r\n\r\nif [ -f \"ServerConfig.toml\" ]\r\nthen\r\necho \"config file is found\"\r\nelse\r\necho \"config file is not found --> making one!\"\r\n   curl -sSL -o ServerConfig.toml https:\/\/pteropaste.com\/du7ev5\r\nfi\r\n\r\n\r\necho \"done\"",
             "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
