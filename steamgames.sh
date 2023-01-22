@@ -12,6 +12,8 @@ mkdir -p $(pwd)/temp
 
 cd $(pwd)/temp
 echo "installing packages that are needed"
+dpkg --add-architecture armhf
+apt update
 sudo apt install -y git curl cmake gcc-arm-linux-gnueabihf sudo
 sudo dpkg --add-architecture armhf && apt-get update
 sudo apt-get install libc6:armhf -y
@@ -28,7 +30,7 @@ sudo systemctl restart systemd-binfmt
 box86 --version
 cd ${STARTDIR}
 rm -rf box86/
-echo "cloning box86"
+echo "cloning box64"
 git clone https://github.com/ptitSeb/box64
 cd box64
 mkdir build; cd build; cmake .. -DRPI4ARM64=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo
