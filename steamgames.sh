@@ -43,5 +43,7 @@ sudo systemctl restart systemd-binfmt
 box64 --version
 cd ${STARTDIR}
 rm -rf box64/
+cd ..
+rm -rf temp/
 echo "install done"
 
