@@ -23,6 +23,7 @@ Some of them work on ARM and also ARM form Oracle Free Tier
 | Rage MP | [egg-rage--m-p.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-rage--m-p.json) | ✅ | ✅ | ✅ | Set the ARCH variable for your arch and select the right docker image |
 | FiveM | [egg-five-m-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-five-m-a-r-m64.json) | ❌ | ✅ | ✅ | !!FEX!! |
 | SCP: Secret Laboratory Exiled| [egg-s-c-p--s-l--exiled--a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-s-c-p--s-l--exiled--a-r-m64.json) | ❌| ✅ | ✅ | !!STEAMCMD!! + slow! + !!FEX!! |
+| Unturned | [egg-unturned.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-unturned.json) | ❌ | ✅ | ✅ | Needs 3 ports (game, game+1, game+2) && !!STEAMCMD!! **The first launch will segfault just wait for the server to start again** |
 
 
 *Right click and click save  
