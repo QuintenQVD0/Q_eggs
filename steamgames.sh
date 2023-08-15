@@ -1,8 +1,27 @@
 #!/bin/bash
 
+# Define the log file path
+LOG_FILE="$(pwd)/install_log.txt"
+
+# Redirect all output to the log file and display it to the user
+exec &> >(tee -a "$LOG_FILE")
+
 # Check if the script is being run as root
 if [ "$EUID" -ne 0 ]; then
   echo "Please run this script as root"
+  exit 1
+fi
+
+# Check for Internet Connectivity
+if ! ping -c 1 google.com &> /dev/null; then
+  echo "Error: No internet connectivity. Please connect to the internet and try again."
+  exit 1
+fi
+
+# Check if the system is ARM64 architecture
+ARCH=$(uname -m)
+if [ "$ARCH" != "aarch64" ]; then
+  echo "Error: This script is intended for ARM64 architecture only."
   exit 1
 fi
 
@@ -19,11 +38,17 @@ if ! NUM_JOBS=$(nproc); then
   NUM_JOBS=2
 fi
 
-# Install required packages
-echo "Installing required packages"
-dpkg --add-architecture armhf
-apt update
-apt install -y git curl cmake gcc-arm-linux-gnueabihf sudo libc6:armhf cmake|| { echo "Failed to install packages"; exit 1; }
+# Check for required dependencies
+echo "Checking and installing required dependencies"
+if ! dpkg -l git curl cmake gcc-arm-linux-gnueabihf sudo libc6:armhf &> /dev/null; then
+  echo "Installing required packages"
+  dpkg --add-architecture armhf
+  apt update
+  apt install -y git curl cmake gcc-arm-linux-gnueabihf sudo libc6:armhf || {
+    echo "Error: Failed to install packages"
+    exit 1
+  }
+fi
 
 # Clone and build box86
 echo "Cloning and building box86"
@@ -67,4 +92,4 @@ rm -rf box64
 cd ..
 rm -rf "$TEMP_DIR"
 
-echo "Installation completed successfully"
+echo "Installation completed successfully at $(date)" >&2
