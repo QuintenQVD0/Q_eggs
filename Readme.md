@@ -15,6 +15,7 @@ Some of them work on ARM and also ARM form Oracle Free Tier
 | SA-MP | [egg-s-a--m-p.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-s-a--m-p.json) | ✅ | ✅ | ✅ | Uses box86 emulation
 | OpenWorld | [egg-open-world.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-open-world.json) | ✅ | ✅ | ✅ | Difrend docker image for ARM64 then for AMD64 and **needs a reinstall after changing the primary port! (remove old config first then reinstall)** | 
 | Counter strike global offensive | [egg-counter--strike--global-offensive.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-counter--strike--global-offensive.json) | ❌ | ✅ | ✅ | !!STEAMCMD!! |
+| Counter Strike Source | [egg-css-arm64.json](egg-css-arm64.json) | ❌ | ✅ | ✅ | !!STEAMCMD!! |
 | Valheim | [egg-valheim.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-valheim.json) | ❌ | ❌ | ✅ | !!STEAMCMD!! |
 | Ark survival evikved | [egg-ark--survival-evolved.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-ark--survival-evolved.json) | ❌ | ❌ | ✅ | !!STEAMCMD!! |
 | paper + hibernation | [egg-paper--hibernation.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-paper--hibernation.json) | ✅ | ❌ | ❌ | to controle the hibarnate in the console it is: `msh` and to controle minecraft is it: `mine` |
