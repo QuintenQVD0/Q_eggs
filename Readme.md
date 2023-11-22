@@ -28,6 +28,7 @@ Some of them work on ARM and also ARM form Oracle Free Tier
 | AssettoServer | [egg-assetto-server.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-assetto-server.json) | ✅ | ✅ | ✅ | Needs 2 ports |
 | The Front | [egg-the-front-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-the-front-a-r-m64.json) | ❌ | ✅ | ✅ | Needs 4 ports, 10GiB disk space, 5GiB ram |
 | Factorio | [egg-factorio-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-factorio-a-r-m64.json) | ❌ | ✅ | ✅ | 1 port |
+| Satisfactory | [egg-satisfactory-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-satisfactory-a-r-m64.json) | ❌ | ❌ | ✅ | 12GiB Ram, 3 ports  !!FEX!!|
 
 
 
