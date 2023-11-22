@@ -29,6 +29,7 @@ Some of them work on ARM and also ARM form Oracle Free Tier
 | The Front | [egg-the-front-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-the-front-a-r-m64.json) | ❌ | ✅ | ✅ | Needs 4 ports, 10GiB disk space, 5GiB ram |
 | Factorio | [egg-factorio-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-factorio-a-r-m64.json) | ❌ | ✅ | ✅ | 1 port |
 | Satisfactory | [egg-satisfactory-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-satisfactory-a-r-m64.json) | ❌ | ❌ | ✅ | 12GiB Ram, 3 ports  !!FEX!!|
+| Garry's Mod | [egg-garrys-mod-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/egg-garrys-mod-a-r-m64.json) | ❌ | ✅ | ✅ | !!STEAMCMD!! |
 
 
 
