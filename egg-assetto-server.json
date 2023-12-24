@@ -4,14 +4,14 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-08-15T15:32:39+02:00",
+    "exported_at": "2023-12-24T11:47:52+01:00",
     "name": "AssettoServer",
     "author": "josdekurk@gmail.com",
     "description": "Custom Assetto Corsa server with focus on freeroam",
     "features": null,
     "docker_images": {
-        "Dotnet_7": "quintenqvd\/pterodactyl_images:dotnet_7",
-        "Dotnet_6": "quintenqvd\/pterodactyl_images:dotnet_6"
+        "Dotnet_8": "quintenqvd\/pterodactyl_images:dotnet_8",
+        "Dotnet_7": "quintenqvd\/pterodactyl_images:dotnet_7"
     },
     "file_denylist": [],
     "startup": ".\/AssettoServer",
