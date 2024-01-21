@@ -15,57 +15,67 @@
     "file_denylist": [],
     "startup": ".\/BeamMP-Server",
     "config": {
-        "files": "{\r\n    \"ServerConfig.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Name =\": \"Name = \\\"{{env.NAME}}\\\"\",\r\n            \"Port =\": \"Port = {{server.build.default.port}}\",\r\n            \"AuthKey =\": \"AuthKey = \\\"{{env.AUTHKEY}}\\\"\",\r\n            \"Private =\": \"Private = {{env.PRIVATE}}\",\r\n            \"MaxPlayers =\": \"MaxPlayers = {{server.build.env.MAX_PLAYERS}}\",\r\n            \"Description =\": \"Description = \\\"{{env.NAME}}\\\"\",\r\n            \"MaxCars =\": \"MaxCars = {{env.MAX_CARS}}\",\r\n            \"Map =\": \"Map = \\\"{{env.MAP}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"ServerConfig.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Name =\": \"Name = \\\"{{env.NAME}}\\\"\",\r\n            \"Port =\": \"Port = {{server.build.default.port}}\",\r\n            \"AuthKey =\": \"AuthKey = \\\"{{env.AUTHKEY}}\\\"\",\r\n            \"Private =\": \"Private = {{env.PRIVATE}}\",\r\n            \"MaxPlayers =\": \"MaxPlayers = {{server.build.env.MAX_PLAYERS}}\",\r\n            \"Description =\": \"Description = \\\"{{env.DESCRIPTION}}\\\"\",\r\n            \"MaxCars =\": \"MaxCars = {{env.MAX_CARS}}\",\r\n            \"Map =\": \"Map = \\\"{{env.MAP}}\\\"\",\r\n            \"LogChat =\": \"LogChat = {{env.LOGCHAT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"[INFO] Vehicle data network online\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "exit"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\napt update\r\n\r\nrm BeamMP-Server\r\n\r\napt-get install -y tar curl jq file ca-certificates build-essential\r\napt-get install -y zlib1g-dev rapidjson-dev liblua5.3-dev libssl-dev libwebsocketpp-dev libcurl4-openssl-dev git make cmake g++ openssl libboost1.74-all-dev\r\n\r\n\r\ngit clone https:\/\/github.com\/BeamMP\/BeamMP-Server.git\r\ncd BeamMP-Server\/\r\n#git reset --hard 28270072\r\nif [ \"${VERSION}\" == \"v3.0.1\" ]; then\r\n    echo \"v3.0.1\"\r\n    git reset --hard 28270072;\r\nelse\r\n    echo ${VERSION};\r\nfi\r\ngit checkout tags\/${VERSION}\r\ngit submodule update --init --recursive\r\ncmake . -DCMAKE_BUILD_TYPE=Release\r\nmake\r\n\r\nmv BeamMP-Server BeamMP.bin\r\nmv BeamMP.bin \/mnt\/server\r\ncd \/mnt\/server\r\nrm -rf BeamMP-Server\/\r\nmv BeamMP.bin BeamMP-Server\r\nchmod +x BeamMP-Server\r\n\r\nif [ -f \"ServerConfig.toml\" ]\r\nthen\r\necho \"config file is found\"\r\nelse\r\necho \"config file is not found --> making one!\"\r\n   curl -sSL -o ServerConfig.toml https:\/\/pteropaste.com\/du7ev5\r\nfi\r\n\r\n\r\necho \"done\"",
-            "container": "debian:bullseye-slim",
+            "script": "#!\/bin\/bash\r\n#Create the server directory\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n#Remove any old versions\r\nrm -f BeamMP-Server\r\n\r\n#Check for latest release & download URLs\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/BeamMP\/BeamMP-Server\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/BeamMP\/BeamMP-Server\/releases\")\r\nMATCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"Server.debian.11.x86_64\" || echo \"Server.debian.11.arm64\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    echo -e \"Using latest BeamMP server version\"\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i \"${MATCH}\" | head -1)\r\nelse\r\n    echo -e \"Chosen version :${VERSION}. Verifying version from releases\"\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i \"${MATCH}\" | head -1)\r\n    else\r\n        echo -e \"No valid versions found. Defaulting to the latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i \"Server\" | | grep -i \"debian\" | grep -i \"x\" | grep -i \"64\" | head -1)\r\n    fi\r\nfi\r\n\r\n#Download the BeamMP server binary\r\necho -e \"Running curl -sSL ${DOWNLOAD_URL} -o BeamMP-Server\"\r\ncurl -sSL ${DOWNLOAD_URL} -o BeamMP-Server\r\nchmod +x BeamMP-Server\r\n\r\n#Create a default configuration file\r\necho \"[HTTP]\r\n# Recommended to keep enabled. With SSL the server will serve https and requires valid key and cert files\r\nUseSSL = true\r\n# Enables the internal HTTP server\r\nHTTPServerEnabled = false\r\nSSLKeyPath = \\\".\/.ssl\/HttpServer\/key.pem\\\"\r\nHTTPServerPort = 8080\r\nSSLCertPath = \\\".\/.ssl\/HttpServer\/cert.pem\\\"\r\n\r\n[General]\r\n# If SendErrors is `true`, the server will send helpful info about crashes and other issues back to the BeamMP developers. This info may include your config, who is on your server at the time of the error, and similar general information. This kind of data is vital in helping us diagnose and fix issues faster. This has no impact on server performance. You can opt-out of this system by setting this to `false`\r\nSendErrorsShowMessage = true\r\nName = \\\"BeamMP Server\\\"\r\nPort = 30814\r\nResourceFolder = \\\"Resources\\\"\r\n# AuthKey has to be filled out in order to run the server\r\nAuthKey = \\\"\\\"\r\nPrivate = true\r\nMaxPlayers = 10\r\nDebug = false\r\nLogChat = true\r\nDescription = \\\"BeamMP Default Description\\\"\r\nMaxCars = 1\r\nMap = \\\"\/levels\/gridmap_v2\/info.json\\\"\r\n# You can turn on\/off the SendErrors message you get on startup here\r\nSendErrors = true\" > ServerConfig.toml\r\n\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "Version to install",
-            "description": "See all versions visit https:\/\/github.com\/BeamMP\/BeamMP-Server\/releases",
-            "env_variable": "VERSION",
-            "default_value": "v3.1.1",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|in:v3.0.2,v3.0.1,v3.1.0,v3.1.1",
-            "field_type": "text"
-        },
-        {
-            "name": "Authentication Key",
-            "description": "BeamMP Server Key (https:\/\/beammp.com\/keymaster)",
-            "env_variable": "AUTHKEY",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:50",
-            "field_type": "text"
-        },
-        {
-            "name": "Max Players",
-            "description": "The maximum number of allowed players",
-            "env_variable": "MAX_PLAYERS",
-            "default_value": "6",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer|max:32",
-            "field_type": "text"
-        },
-        {
-            "name": "Server Description",
-            "description": "The Description of your server. This is what appears on the server list.",
+            "name": "Server Name",
+            "description": "The name of your server. This is what appears on the server list.",
             "env_variable": "NAME",
             "default_value": "BeamMP Server",
             "user_viewable": true,
             "user_editable": true,
+            "rules": "required|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Description",
+            "description": "Sets the server description",
+            "env_variable": "DESCRIPTION",
+            "default_value": "BeamMP Default Description",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "BeamMP Server Version",
+            "description": "The BeamMP server version to be installed. Latest or invalid versions will default to latest. See all available versions at https:\/\/github.com\/BeamMP\/BeamMP-Server\/releases\r\n\r\nexample: v3.1.0 or  v2.2.0 or latest",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:12",
+            "field_type": "text"
+        },
+        {
+            "name": "Authentication Key",
+            "description": "The authentication key for your server. A key can be obtained from the BeamMP keymaster at https:\/\/keymaster.beammp.com",
+            "env_variable": "AUTHKEY",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "The maximum number of players allowed on the server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "6",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|max:100",
             "field_type": "text"
         },
         {
@@ -85,7 +95,7 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|max:4",
+            "rules": "required|integer|max:10",
             "field_type": "text"
         },
         {
@@ -96,6 +106,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Chat logging",
+            "description": "Enable chat logging by the server",
+            "env_variable": "LOGCHAT",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
             "field_type": "text"
         }
     ]
