@@ -52,4 +52,5 @@ FEX is a special emulator. It is something like QEMU-user but with its own file 
 it also will create a folder called rootfs and a file in /home/container called `Config.json` Do not touch those files!
 Keep in mind that the console will be slow / can reports Freezing because of its 2nd filesystem. You safly ignore those!
 
-**When using FEX,  there is no auto update. You will have to hit reinstall!**
+~~**When using FEX,  there is no auto update. You will have to hit reinstall!**~~
+**FEX now has a very basic and still experimental auto update**
