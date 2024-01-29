@@ -7,7 +7,7 @@ Some of them work on ARM and also ARM form Oracle Free Tier
 
 | Service | file* | AMD64 | ARM64 | ARM Oracle | More info |
 |--|--|--|--|--|--|
-| Gogs | [egg-gogs.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/QuintenQVD0/Q_eggs/applications/egg-gogs.json) | ✅ | ✅ | ✅ | Not ssl ready and on ARM use native ARM version
+| Gogs | [egg-gogs.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/applications/egg-gogs.json) | ✅ | ✅ | ✅ | Not ssl ready and on ARM use native ARM version
 
 ## Databases
 | Service | file* | AMD64 | ARM64 | ARM Oracle | More info |
