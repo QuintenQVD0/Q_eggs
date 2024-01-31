@@ -3,6 +3,10 @@ Custom eggs for [pterodactyl.io](https://pterodactyl.io).
 Some of them work on ARM and also ARM form Oracle Free Tier
 
 
+If you want to support my work:
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/J3J2HGECS)
+
 ## Aplication
 
 | Service | file* | AMD64 | ARM64 | ARM Oracle | More info |
