@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-03-27T16:18:25+02:00",
+    "exported_at": "2024-02-13T14:10:41+01:00",
     "name": "SCP:SL - Exiled - ARM64",
     "author": "josdekurk@gmail.com",
     "description": "Egg for SCP: Secret Laboratory Dedicated Linux Server with Exiled Plugin Framework",
@@ -15,7 +15,7 @@
         "FEX": "quintenqvd\/pterodactyl_images:dev_fex"
     },
     "file_denylist": [],
-    "startup": "export FEX_APP_DATA_LOCATION=\/home\/container\/rootfs\/; export FEX_APP_CONFIG_LOCATION=\/home\/container\/; export XDG_DATA_HOME=\/home\/container; export HOME=\/home\/container; FEXInterpreter LocalAdmin {{SERVER_PORT}}",
+    "startup": "export HOME=\/home\/container; FEXInterpreter LocalAdmin {{SERVER_PORT}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Started new session on port\"\r\n}",
@@ -58,6 +58,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "FEX_ROOTFS_PATH",
+            "description": "If you want a custom (mounted) fex RootFS\r\nMust end in a \/\r\nExample: \/fex\/",
+            "env_variable": "FEX_ROOTFS_PATH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "nullable|string|max:32",
             "field_type": "text"
         }
     ]
