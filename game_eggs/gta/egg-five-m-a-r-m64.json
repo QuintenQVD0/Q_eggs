@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-03-25T13:51:31+01:00",
+    "exported_at": "2024-02-13T14:08:20+01:00",
     "name": "FiveM ARM64",
     "author": "josdekurk@gmail.com",
     "description": "A FiveM egg for the latest builds due to recent changes in FiveM",
@@ -13,7 +13,7 @@
         "quintenqvd\/pterodactyl_images:dev_fex": "quintenqvd\/pterodactyl_images:dev_fex"
     },
     "file_denylist": [],
-    "startup": "cd \/home\/container\/fivem; export FEX_APP_DATA_LOCATION=\/home\/container\/rootfs\/; export FEX_APP_CONFIG_LOCATION=\/home\/container\/; export XDG_DATA_HOME=\/home\/container; FEXInterpreter \/home\/container\/fivem\/alpine\/opt\/cfx-server\/ld-musl-x86_64.so.1 --library-path \"\/home\/container\/fivem\/alpine\/usr\/lib\/v8\/:\/home\/container\/fivem\/alpine\/lib\/:\/home\/container\/fivem\/alpine\/usr\/lib\/\" -- \/home\/container\/fivem\/alpine\/opt\/cfx-server\/FXServer +set citizen_dir \/home\/container\/fivem\/alpine\/opt\/cfx-server\/citizen\/ +set sv_licenseKey {{FIVEM_LICENSE}} +set steam_webApiKey {{STEAM_WEBAPIKEY}} +set sv_maxplayers {{MAX_PLAYERS}} +set serverProfile default +set txAdminPort {{TXADMIN_PORT}} $( [ \"$TXADMIN_ENABLE\" == \"1\" ] || printf %s '+exec server.cfg' )",
+    "startup": "cd \/home\/container\/fivem; export HOME=\/home\/container; FEXInterpreter \/home\/container\/fivem\/alpine\/opt\/cfx-server\/ld-musl-x86_64.so.1 --library-path \"\/home\/container\/fivem\/alpine\/usr\/lib\/v8\/:\/home\/container\/fivem\/alpine\/lib\/:\/home\/container\/fivem\/alpine\/usr\/lib\/\" -- \/home\/container\/fivem\/alpine\/opt\/cfx-server\/FXServer +set citizen_dir \/home\/container\/fivem\/alpine\/opt\/cfx-server\/citizen\/ +set sv_licenseKey {{FIVEM_LICENSE}} +set steam_webApiKey {{STEAM_WEBAPIKEY}} +set sv_maxplayers {{MAX_PLAYERS}} +set serverProfile default +set txAdminPort {{TXADMIN_PORT}} $( [ \"$TXADMIN_ENABLE\" == \"1\" ] || printf %s '+exec server.cfg' )",
     "config": {
         "files": "{\r\n    \"fivem\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"endpoint_add_tcp\": \"endpoint_add_tcp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"endpoint_add_udp\": \"endpoint_add_udp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"sv_hostname\": \"sv_hostname \\\"{{server.build.env.SERVER_HOSTNAME}}\\\"\",\r\n            \"set sv_licenseKey\": \"set sv_licenseKey {{server.build.env.FIVEM_LICENSE}}\",\r\n            \"set steam_webApiKey\": \"set steam_webApiKey {{server.build.env.STEAM_WEBAPIKEY}}\",\r\n            \"sv_maxclients\": \"sv_maxclients {{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"succeeded. Welcome!\"\r\n}",
@@ -106,6 +106,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "FEX_ROOTFS_PATH",
+            "description": "If you want a custom (mounted) fex RootFS\r\nMust end in a \/\r\nExample: \/fex\/",
+            "env_variable": "FEX_ROOTFS_PATH",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string|max:32",
             "field_type": "text"
         }
     ]
