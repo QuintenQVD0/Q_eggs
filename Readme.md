@@ -123,8 +123,14 @@ How to do it:
 9. Make that file again and opend it with an editor. `nano config.yml`
 10. Paste the contence of your clipboard in it, then save and exit.
 11. Start the wings again. `systemctl restart wings`
-12. Now when making a server in the `FEX_ROOTFS_PATH` variable enter the value of target you set in step 3.
+12. Now when making a server in the `FEX_ROOTFS_PATH` variable enter the value of target you set in step 3 **This must end in a / so if you did in step 3 `/fex` then here you need to enter `/fex/` else it will not work**.
 13. Now create the server but uncheck the box  `Start Server when Installed`!!
 14. When the server is fully installed, go to the admin side of that server, the Mounts tab.
 15. Press on the green "plus" icon to add that mount to that server.
-16. If this is the first server using that mount it will download the RootFS, else it will say it already exits and run / start the game server
+16. If this is the first server using that mount it will download the RootFS, else it will say it already exits and run / start the game server.
+
+![afbeelding](https://github.com/QuintenQVD0/Q_eggs/assets/67589015/ca2d028c-cbbd-4a55-b161-a5555b82a938)
+![afbeelding](https://github.com/QuintenQVD0/Q_eggs/assets/67589015/be782bfb-81a3-484a-8b67-10d015f818b8)
+![afbeelding](https://github.com/QuintenQVD0/Q_eggs/assets/67589015/bbe1cb31-9505-4bd1-8a1d-5e5b248da3d2)
+![afbeelding](https://github.com/QuintenQVD0/Q_eggs/assets/67589015/be1bb45e-5064-4945-a93b-4c74ffe91e26)
+
