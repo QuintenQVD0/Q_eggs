@@ -105,3 +105,26 @@ Keep in mind that the console will be slow / can reports Freezing because of its
 
 ~~**When using FEX,  there is no auto update. You will have to hit reinstall!**~~
 **FEX now has a very basic and still experimental auto update**
+
+## FEX Mount
+
+There is now a still but working experimental option to put the RootFS in a mount
+
+How to do it:
+
+1. Make a directory on the host system to where the mount will be stored. Example `/var/lib/pterodactyl/mounts/fex`
+2. Chown that directory as the pterodactyl user. `chown pterodactyl:pterodactyl /var/lib/pterodactyl/mounts/fex`
+3. Go on the admin side and make a new mount. Where source is the PATH from step 1 and the destionation a PATH but this can not be in /home/container! Recommended `/fex`
+4. Set Read only to false, User mountable to true. Link it to your arm64 node and add eggs that will use this mount
+5. Stop the wings `systemsctl stop wings` (This will stop the console from working, servers will keep running).
+6. Coppy the example config from the admin side under Nodes -> Your node -> Configuration to your clipboard. (**Do not use auto deploy!**)
+7. Navigate on the host system to /etc/pterodactyl `cd /etc/pterodactyl`
+8. Remove the exitings config.yml `rm config.yml`
+9. Make that file again and opend it with an editor. `nano config.yml`
+10. Paste the contence of your clipboard in it, then save and exit.
+11. Start the wings again. `systemctl restart wings`
+12. Now when making a server in the `FEX_ROOTFS_PATH` variable enter the value of target you set in step 3.
+13. Now create the server but uncheck the box  `Start Server when Installed`!!
+14. When the server is fully installed, go to the admin side of that server, the Mounts tab.
+15. Press on the green "plus" icon to add that mount to that server.
+16. If this is the first server using that mount it will download the RootFS, else it will say it already exits and run / start the game server
