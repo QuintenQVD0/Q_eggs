@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-02-10T18:53:57+01:00",
+    "exported_at": "2024-02-25T18:11:41+01:00",
     "name": "Enshrouded ARM64",
     "author": "josdekurk@gmail.com",
     "description": "Enshrouded is a game of survival, crafting, and Action RPG combat, set within a sprawling voxel-based continent. As you journey across the mountains and deserts of an open world, you are free to choose your path and shape your destiny.  Credit to gOOvER for the original amd64 egg",
@@ -108,6 +108,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "FEX_ROOTFS_PATH",
+            "description": "If you want a custom (mounted) fex RootFS\r\nMust end in a \/\r\nExample: \/fex\/",
+            "env_variable": "FEX_ROOTFS_PATH",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string|max:32",
             "field_type": "text"
         }
     ]
