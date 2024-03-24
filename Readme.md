@@ -49,7 +49,7 @@ If you want to support my work:
 | paper + hibernation | [egg-paper--hibernation.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/minecraft/egg-paper--hibernation.json) | ✅ | ❌ | ❌ | to controle the hibarnate in the console it is: `msh` and to controle minecraft is it: `mine` |
 | Bedrock Vanilla | [egg-vanilla-bedrock.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/minecraft/egg-vanilla-bedrock.json) | ❌ | ✅ | ✅ | Works but slow startup |
 
-### Minecraft
+### Quake 2
 | Service | file* | AMD64 | ARM64 | ARM Oracle | More info |
 |--|--|--|--|--|--|
 | Q2PRO | [egg-q2-p-r-o.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/quake_2/Q2PRO/egg-q2-p-r-o.json) | ✅ | ❌ | ❌ | Shiped .pak files may be out of date. + install can take 15 minutes. |
