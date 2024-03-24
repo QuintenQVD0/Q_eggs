@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-03-24T17:13:16+01:00",
+    "name": "Q2PRO",
+    "author": "josdekurk@gmail.com",
+    "description": "Q2PRO is an enhanced Quake 2 client and server for Windows and Linux.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/steamcmd:ubuntu": "ghcr.io\/parkervcp\/steamcmd:ubuntu"
+    },
+    "file_denylist": [],
+    "startup": ".\/q2proded +set net_ip 0.0.0.0 +set net_port {{SERVER_PORT}} +exec server.cfg",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"====== Q2PRO initialized ======\"\r\n}",
+        "logs": "{}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n## Package logic\r\napt update\r\napt -y install meson gcc libc6-dev libsdl2-dev libopenal-dev \\\r\n                    libpng-dev libjpeg-dev zlib1g-dev mesa-common-dev \\\r\n                    libcurl4-gnutls-dev libx11-dev libxi-dev \\\r\n                    libwayland-dev wayland-protocols libdecor-0-dev \\\r\n                    libavcodec-dev libavformat-dev libavutil-dev \\\r\n                    libswresample-dev libswscale-dev ca-certificates curl git unzip zip tar jq wget\r\n                    \r\ndpkg --add-architecture i386\r\napt update \r\napt -y install lib32gcc-s1 libsdl2-2.0-0:i386\r\n                    \r\n## Base dir (will be \/home\/container)\r\nmkdir -p \/mnt\/server\/\r\ncd \/mnt\/server\r\n\r\n## Download the source\r\ncurl -sSL -o q2pro.tar.gz https:\/\/skuller.net\/q2pro\/nightly\/q2pro-source.tar.gz\r\ntar xvf q2pro.tar.gz\r\nrm  q2pro.tar.gz\r\ncd q2pro-r*\r\n\r\n## Build the source\r\nmeson setup builddir\r\nmeson configure -Dsystem-wide=false -Dhomedir=\/home\/container -Dprefix=\/home\/container builddir\r\nmeson compile -C builddir\r\n\r\n## Move logic\r\ncd \/mnt\/server\/q2pro-r*\/\r\nmv builddir\/* \/mnt\/server\r\n\r\nrm -rf \/mnt\/server\/q2pro-r*\r\n\r\ncd \/mnt\/server\r\n## Baseq2 files and needed so file\r\ncurl -sSL -o baseq2.zip \"https:\/\/www.dropbox.com\/scl\/fi\/9c7wv5og6p9oukkq1ayrd\/baseq2.zip?rlkey=zu593fn0limaw7gltpt5f9vee&dl=1\"\r\nunzip -o baseq2.zip\r\nrm baseq2.zip\r\n\r\ncp \/mnt\/server\/gamex86_64.so \/mnt\/server\/baseq2\r\nchmod 755 \/mnt\/server\/baseq2\/gamex86_64.so\r\n\r\n## cleanup\r\ncd \/mnt\/server\r\nrm -rf config.h compile_commands.json build.ninja meson-private meson-logs meson-info\r\n\r\n## server.cfg download logic\r\ncd \/mnt\/server\/baseq2\r\nif [ -f \"\/mnt\/server\/baseq2\/server.cfg\" ]; then\r\n    echo \"Config file exists.\"\r\nelse \r\n    echo \"Config does not exist.\"\r\n    curl -sSL -o server.cfg https:\/\/pteropaste.com\/jnqnc1lss0at\r\nfi\r\n\r\necho \"install finished\"",
+            "container": "debian:bookworm",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
