@@ -1,5 +1,6 @@
 # Q_eggs
-Custom eggs for [pterodactyl.io](https://pterodactyl.io). 
+Custom eggs ARM64 eggs.
+
 Some of them work on ARM and also ARM form Oracle Free Tier
 
 
