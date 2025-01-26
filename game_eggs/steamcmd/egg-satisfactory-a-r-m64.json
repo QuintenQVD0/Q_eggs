@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-09-20T08:52:20+02:00",
+    "exported_at": "2025-01-26T14:31:58+01:00",
     "name": "Satisfactory ARM64",
     "author": "red_thirten@yahoo.com",
     "description": "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "FEX": "quintenqvd\/pterodactyl_images:dev_fex"
+        "FEX": "quintenqvd\/pterodactyl_images:dev_fex_latest"
     },
     "file_denylist": [],
     "startup": "export HOME=\/home\/container; FEXInterpreter .\/Engine\/Binaries\/Linux\/*-Linux-Shipping FactoryGame -Port={{SERVER_PORT}}",
@@ -20,7 +20,7 @@
         "files": "{\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"[\/Script\/Engine.GameSession].MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    },\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Engine.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"[\/Script\/FactoryGame.FGSaveSession].mNumRotatingAutosaves\": \"{{server.build.env.NUM_AUTOSAVES}}\",\r\n            \"[\/Script\/OnlineSubsystemUtils.IpNetDriver].InitialConnectTimeout\": \"{{server.build.env.INIT_CONNECT_TIMEOUT}}\",\r\n            \"[\/Script\/OnlineSubsystemUtils.IpNetDriver].ConnectionTimeout\": \"{{server.build.env.CONNECT_TIMEOUT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Engine Initialization\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "^SIGKILL"
     },
     "scripts": {
         "installation": {
