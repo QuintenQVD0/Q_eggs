@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-02-13T14:10:41+01:00",
+    "exported_at": "2025-01-26T14:59:40+01:00",
     "name": "SCP:SL - Exiled - ARM64",
     "author": "josdekurk@gmail.com",
     "description": "Egg for SCP: Secret Laboratory Dedicated Linux Server with Exiled Plugin Framework",
@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "FEX": "quintenqvd\/pterodactyl_images:dev_fex"
+        "FEX": "quintenqvd\/pterodactyl_images:dev_fex_latest"
     },
     "file_denylist": [],
     "startup": "export HOME=\/home\/container; FEXInterpreter LocalAdmin {{SERVER_PORT}}",
@@ -68,6 +68,16 @@
             "user_viewable": true,
             "user_editable": false,
             "rules": "nullable|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Auto update the server on startup",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean",
             "field_type": "text"
         }
     ]
