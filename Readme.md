@@ -48,7 +48,8 @@ If you want to support my work:
 | Service | file* | AMD64 | ARM64 | ARM Oracle | More info |
 |--|--|--|--|--|--|
 | paper + hibernation | [egg-paper--hibernation.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/minecraft/egg-paper--hibernation.json) | ✅ | ❌ | ❌ | to controle the hibarnate in the console it is: `msh` and to controle minecraft is it: `mine` |
-| Bedrock Vanilla | [egg-vanilla-bedrock.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/minecraft/egg-vanilla-bedrock.json) | ❌ | ✅ | ✅ | Works but slow startup |
+| Bedrock Vanilla (box64 emulator) | [egg-vanilla-bedrock.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/minecraft/egg-vanilla-bedrock-a-r-m64--b-o-x64.json) | ❌ | ✅ | ✅ | Use for better performance |
+| Bedrock Vanilla (fex-emu emulator) | [egg-vanilla-bedrock.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/minecraft/egg-vanilla-bedrock-a-r-m64--f-e-x.json) | ❌ | ✅ | ✅ | Use for better compatibility |
 
 ### Path of Titans
 | Service | file* | AMD64 | ARM64 | ARM Oracle | More info |
