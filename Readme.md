@@ -66,6 +66,7 @@ If you want to support my work:
 | Service | file* | AMD64 | ARM64 | ARM Oracle | More info |
 |--|--|--|--|--|--|
 | 7 days to die | [egg-7-days-to-die-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-7-days-to-die-a-r-m64.json) | ❌ | ✅ | ✅ | !!STEAMCMD!! + needs 6 ports + console is realy slow and shutdown can take up to 50 seconds |
+| Abiotic Factor | [egg-abiotic-factor-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-abiotic-factor-a-r-m64.json) | ❌ | ✅ | ✅ | 2 Ports + !!STEAMCMD!! + !!FEX!! + Startup takes 5+ minutes |
 | Ark survival evikved | [egg-ark--survival-evolved.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-ark--survival-evolved.json) | ❌ | ❌ | ✅ | !!STEAMCMD!! |
 | AssettoServer | [egg-assetto-server.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-assetto-server.json) | ✅ | ✅ | ✅ | Needs 2 ports |
 | Counter strike global offensive | [egg-counter--strike--global-offensive.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-counter--strike--global-offensive.json) | ❌ | ✅ | ✅ | !!STEAMCMD!! |
