@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-02-25T18:11:41+01:00",
+    "exported_at": "2025-11-16T10:44:38+00:00",
     "name": "Enshrouded ARM64",
     "author": "josdekurk@gmail.com",
     "description": "Enshrouded is a game of survival, crafting, and Action RPG combat, set within a sprawling voxel-based continent. As you journey across the mountains and deserts of an open world, you are free to choose your path and shape your destiny.  Credit to gOOvER for the original amd64 egg",
@@ -12,13 +12,14 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "quintenqvd\/pterodactyl_images:fex_proton": "quintenqvd\/pterodactyl_images:fex_proton"
+        "FEX Proton Latest": "quintenqvd\/pterodactyl_images:fex_proton_latest"
     },
     "file_denylist": [],
-    "startup": "export HOME=\/home\/container; FEXInterpreter \/usr\/local\/bin\/proton run .\/enshrouded_server.exe",
+    "startup": "export HOME=\/home\/container; FEX \/usr\/local\/bin\/proton run .\/enshrouded_server.exe",
+    "image": null,
     "config": {
-        "files": "{\r\n    \"enshrouded_server.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"name\": \"{{server.build.env.SRV_NAME}}\",\r\n            \"password\": \"{{server.build.env.SRV_PW}}\",\r\n            \"slotCount\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"gamePort\": \"{{server.build.default.port}}\",\r\n            \"queryPort\": \"{{server.build.env.QUERY_PORT}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"[Session] 'HostOnline' (up)!\"\r\n}",
+        "files": "{\n    \"enshrouded_server.json\": {\n        \"parser\": \"json\",\n        \"find\": {\n            \"name\": \"{{server.build.env.SRV_NAME}}\",\n            \"password\": \"{{server.build.env.SRV_PW}}\",\n            \"slotCount\": \"{{server.build.env.MAX_PLAYERS}}\",\n            \"gamePort\": \"{{server.build.default.port}}\",\n            \"queryPort\": \"{{server.build.env.QUERY_PORT}}\"\n        }\n    }\n}",
+        "startup": "{\n    \"done\": \"[Session] 'HostOnline' (up)!\"\n}",
         "logs": "{}",
         "stop": "^^C"
     },
