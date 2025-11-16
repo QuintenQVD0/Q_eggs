@@ -1,0 +1,95 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-11-16T10:31:04+00:00",
+    "name": "Necesse",
+    "author": "josdekurk@gmail.com",
+    "description": "Build, quest, and conquer across an infinite procedurally generated world. Play alone or with friends as you establish a settlement and explore deep dungeons, fight monsters and bosses, mine rare ores, craft magical equipment, recruit specialists for your colony, and more!",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "quintenqvd\/pterodactyl_images:dev_fex_latest": "quintenqvd\/pterodactyl_images:dev_fex_latest"
+    },
+    "file_denylist": [],
+    "startup": ".\/jre\/bin\/java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar Server.jar -localdir -nogui -world {{SAVE_NAME}}",
+    "image": null,
+    "config": {
+        "files": "{\n    \"cfg\\\/server.cfg\": {\n        \"parser\": \"properties\",\n        \"find\": {\n            \"port\": \"{{server.build.default.port}},\",\n            \"slots\": \"{{server.build.env.SERVER_SLOTS}},\",\n            \"password\": \"{{server.build.env.SERVER_PASSWORD}},\"\n        }\n    }\n}",
+        "startup": "{\n    \"done\": \"Type help for list of commands.\"\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\n# steamcmd Base Installation Script\n#\n# Server Files: \\\/mnt\\\/server\n# Image to install with is 'ghcr.io\\\/parkervcp\\\/installers:debian'\n\napt -y install jq\n\n## just in case someone removed the defaults.\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\n    echo -e \"steam user is not set.\\n\"\n    echo -e \"Using anonymous user.\\n\"\n    STEAM_USER=anonymous\n    STEAM_PASS=\"\"\n    STEAM_AUTH=\"\"\nelse\n    echo -e \"user set to ${STEAM_USER}\"\nfi\n\n## download and install steamcmd\ncd \/tmp\nmkdir -p \/mnt\/server\/steamcmd\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\ncd \/mnt\/server\/steamcmd\n\n# SteamCMD fails otherwise for some reason, even running as root.\n# This is changed at the end of the install process anyways.\nchown -R root:root \/mnt\nexport HOME=\/mnt\/server\n\n## install game using steamcmd\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\n\n## set up 32 bit libraries\nmkdir -p \/mnt\/server\/.steam\/sdk32\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\n\n## set up 64 bit libraries\nmkdir -p \/mnt\/server\/.steam\/sdk64\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\n\n\n# setup the default config file\nexport SERVER_CFG=\/mnt\/server\/cfg\/server.cfg\n\nif [ ! -f \"$SERVER_CFG\" ]; then\n    echo \"Generating server config\"\n    mkdir \"$(dirname \"$SERVER_CFG\")\"\n    cat > \"$SERVER_CFG\" <<EOF\nSERVER = {\n\tport = $SERVER_PORT, \/\/ [0 - 65535] Server default port\n\tslots = $SERVER_SLOTS, \/\/ [1 - 250] Server default slots\n\tpassword = $SERVER_PASSWORD, \/\/ Leave blank for no password\n\tmaxClientLatencySeconds = 30,\n\tpauseWhenEmpty = true,\n\tgiveClientsPower = true, \/\/ If true, clients will have much more power over what hits them, their position etc\n\tlogging = true, \/\/ If true, will create log files for each server start\n\tlanguage = en,\n\tunloadLevelsCooldown = 30, \/\/ The number of seconds a level will stay loaded after the last player has left it\n\tworldBorderSize = -1, \/\/ The max distance from spawn players can travel. -1 for no border\n\tdroppedItemsLifeMinutes = 0, \/\/ Minutes that dropped items will stay in the world. 0 or less for indefinite\n\tunloadSettlements = false, \/\/ If the server should unload player settlements or keep them loaded\n\tmaxSettlementsPerPlayer = -1, \/\/ The maximum amount of settlements per player. -1 or less means infinite\n\tmaxSettlersPerSettlement = -1, \/\/ The maximum amount of settlers per settlement. -1 or less means infinite\n\tjobSearchRange = 100, \/\/ The tile search range of settler jobs\n\tzipSaves = true, \/\/ If true, will create new saves uncompressed\n\tMOTD =  \/\/ Message of the day\n}\nEOF\nfi\n\nrm -rf \/mnt\/server\/jre\n\nDOWNLOAD_LINK=$(curl -s -X 'GET' 'https:\/\/api.adoptium.net\/v3\/assets\/latest\/17\/hotspot?architecture=aarch64&image_type=jre&os=linux&vendor=eclipse' -H 'accept: application\/json' | jq -r .[].binary.package.link)\n\nmkdir -p \/mnt\/server\/jre && cd \/mnt\/server\/jre\necho \"Installing ARM64 java version\"\nwget -O OpenJDK17U-jre_aarch64_linux_hotspot_17.tar.gz $DOWNLOAD_LINK\ntar xvf OpenJDK17U-jre_aarch64_linux_hotspot_17.tar.gz  --strip-components=1\nrm OpenJDK17U-jre_aarch64_linux_hotspot_17.tar.gz\n## install end\necho \"-----------------------------------------\"\necho \"Installation completed...\"\necho \"-----------------------------------------\"",
+            "container": "quintenqvd\/pterodactyl_images:installer_steamcmd",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Player Slots",
+            "description": "Number of slots available for players to join the server.",
+            "env_variable": "SERVER_SLOTS",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|max:99",
+            "field_type": "text"
+        },
+        {
+            "name": "Save Name",
+            "description": "Name of the save file.",
+            "env_variable": "SAVE_NAME",
+            "default_value": "Save1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password required to enter the server.",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam App ID",
+            "description": "DO NOT EDIT",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1169370",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|in:1169370",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Auto Update",
+            "description": "Enable or disable auto-update on startup. 0 to disable and 1 to enable.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Beta Branch",
+            "description": "Steam Beta branch to install.",
+            "env_variable": "SRCDS_BETAID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        }
+    ]
+}
