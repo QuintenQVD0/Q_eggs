@@ -48,7 +48,7 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|boolean",
+            "rules": "boolean",
             "field_type": "text"
         },
         {
@@ -128,7 +128,7 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|boolean",
+            "rules": "boolean",
             "field_type": "text"
         },
         {
