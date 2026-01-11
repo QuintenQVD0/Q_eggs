@@ -131,8 +131,8 @@ A curated collection of ARM64-compatible eggs for Pterodactyl Panel, with specia
 ### V
 | Service | File | AMD64 | ARM64 | Oracle ARM | Requirements | Notes |
 |---------|------|-------|-------|------------|-------------|-------|
-| Valheim | [egg-valheim.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-valheim.json) | ❌ | ❌ | ✅ | 🎮 | |
-
+| Valheim | [egg-valheim.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-valheim.json) | ❌ | ❌ | ✅ | 🖥️ 🎮 | |
+| Vein | [egg-v-e-i-n-arm64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-v-e-i-n-arm64.json) | ❌ | ✅ | ❔ | 🖥️ 🎮 | 2 ports |
 ---
 
 ## SteamCMD
