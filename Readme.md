@@ -55,6 +55,7 @@ A curated collection of ARM64-compatible eggs for Pterodactyl Panel, with specia
 |---------|------|-------|-------|------------|-------------|-------|
 | Counter Strike: Global Offensive | [egg-counter--strike--global-offensive.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-counter--strike--global-offensive.json) | ❌ | ✅ | ✅ | 🎮 | |
 | Counter Strike: Source | [egg-css-arm64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-css-arm64.json) | ❌ | ✅ | ✅ | 🎮 | |
+| Core Keeper| [egg-core-keeper.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-core-keeper.json) | ❌ | ✅ | ✅ | 🎮 | 2 ports: game and game +1; Slow |
 
 ### E
 | Service | File | AMD64 | ARM64 | Oracle ARM | Requirements | Notes |
@@ -143,6 +144,7 @@ curl -sSL https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/steamgames.s
 ```
 
 **NEW**
+
 If you get the error missing configuration then there are two options to fix that.
 1. Reinstall the server
 2. Turn on auto update
