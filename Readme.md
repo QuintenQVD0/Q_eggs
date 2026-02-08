@@ -59,6 +59,7 @@ A curated collection of ARM64-compatible eggs for Pterodactyl Panel, with specia
 ### E
 | Service | File | AMD64 | ARM64 | Oracle ARM | Requirements | Notes |
 |---------|------|-------|-------|------------|-------------|-------|
+| ET Legacy | [egg-e-t-legacy.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/et_legacy/egg-e-t-legacy.json) | ❌ | ✅ | ✅ | 🎮 | 2 ports |
 | Enshrouded | [egg-enshrouded-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-enshrouded-a-r-m64.json) | ❌ | ✅ | ✅ | 🎮 🖥️ | 2 ports, 18GB disk space |
 
 ### F
