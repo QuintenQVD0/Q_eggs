@@ -142,6 +142,11 @@ if **!!STEAMCMD!!** is mentioned in the egg more info then you have to run this 
 curl -sSL https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/steamgames.sh | bash
 ```
 
+**NEW**
+If you get the error missing configuration then there are two options to fix that.
+1. Reinstall the server
+2. Turn on auto update
+
 ## FEX
 **!!FEX!!**
 
