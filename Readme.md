@@ -97,7 +97,7 @@ A curated collection of ARM64-compatible eggs for Pterodactyl Panel, with specia
 |---------|------|-------|-------|------------|-------------|-------|
 | Palworld | [egg-palworld-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-palworld-a-r-m64.json) | ❌ | ✅ | ✅ | 🎮 🖥️ | Console may take 3 minutes to become responsive |
 | Path of Titans | [egg-path-of-titans-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/path_of_titans/egg-path-of-titans-a-r-m64.json) | ❔ | ❔ | ✅ | | 5 ports, native ARM64 |
-| Project Zomboid | [egg-project-zomboid-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-project-zomboid-a-r-m64.json) | ❌ | ❌ | ✅ | 🎮 🖥️ | Doesn't work on Raspberry Pi |
+| Project Zomboid | [egg-project-zomboid-a-r-m64.json](https://raw.githubusercontent.com/QuintenQVD0/Q_eggs/main/game_eggs/steamcmd/egg-project-zomboid-a-r-m64.json) | ❌ | ❌ | ✅ | 🎮 🖥️ | See: [Extra steps](https://github.com/QuintenQVD0/Q_eggs/issues/172#issuecomment-4018788677) but use the egg linked here not the one from the issue |
 
 ### Q
 | Service | File | AMD64 | ARM64 | Oracle ARM | Requirements | Notes |
