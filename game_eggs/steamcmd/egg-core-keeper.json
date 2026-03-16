@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2026-02-08T18:07:23+00:00",
+    "exported_at": "2026-03-16T07:40:23+00:00",
     "name": "Core Keeper",
     "author": "quinten@pelican.dev",
     "description": "Core Keeper is a survival sandbox game for single or multiplayers.\r\n\r\n--- Drawn towards a mysterious relic, you are an explorer who awakens in an ancient cavern of creatures, resources and trinkets. Trapped deep underground will your survival skills be up to the task? Mine relics and resources to build your base, craft new equipment, survive, and power up the Core. ---",
@@ -57,7 +57,7 @@
             "default_value": "",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "",
+            "rules": "nullable|string|max:32",
             "field_type": "text"
         },
         {
