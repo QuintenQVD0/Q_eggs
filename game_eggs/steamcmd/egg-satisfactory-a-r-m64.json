@@ -15,7 +15,7 @@
         "FEX": "quintenqvd\/pterodactyl_images:dev_fex_latest"
     },
     "file_denylist": [],
-    "startup": "export HOME=\/home\/container; FEXInterpreter .\/Engine\/Binaries\/Linux\/*-Linux-Shipping FactoryGame -Port={{SERVER_PORT}}",
+    "startup": "export HOME=\/home\/container; FEX .\/Engine\/Binaries\/Linux\/*-Linux-Shipping FactoryGame -Port={{SERVER_PORT}}",
     "config": {
         "files": "{\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"[\/Script\/Engine.GameSession].MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    },\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Engine.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"[\/Script\/FactoryGame.FGSaveSession].mNumRotatingAutosaves\": \"{{server.build.env.NUM_AUTOSAVES}}\",\r\n            \"[\/Script\/OnlineSubsystemUtils.IpNetDriver].InitialConnectTimeout\": \"{{server.build.env.INIT_CONNECT_TIMEOUT}}\",\r\n            \"[\/Script\/OnlineSubsystemUtils.IpNetDriver].ConnectionTimeout\": \"{{server.build.env.CONNECT_TIMEOUT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Engine Initialization\"\r\n}",
