@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-05-08T14:54:15+02:00",
+    "exported_at": "2026-10-19T13:20:55+00:00",
     "name": "Palworld ARM64",
     "author": "josdekurk@gmail.com",
     "description": "Fight, farm, build and work alongside mysterious creatures called \"Pals\" in this completely new multiplayer, open world survival and crafting game!",
@@ -12,15 +12,15 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "FEX": "quintenqvd\/pterodactyl_images:dev_fex"
+        "FEX Latest": "quintenqvd\/pterodactyl_images:dev_fex_latest"
     },
     "file_denylist": [
         "PalServer.sh"
     ],
-    "startup": "export HOME=\/home\/container; .\/PalworldServerConfigParser; (while read cmd; do rcon -s -a \"127.0.0.1:{{RCON_PORT}}\" -p \"{{ADMIN_PASSWORD}}\" \"$cmd\";done) < \/dev\/stdin & FEXInterpreter \/home\/container\/Pal\/Binaries\/Linux\/PalServer-Linux-Shipping Pal -publiclobby {{EXTRA_FLAGS}} -port={{SERVER_PORT}} -publicport={{SERVER_PORT}} -servername=\"{{SERVER_NAME}}\" -players={{MAX_PLAYERS}} $(if [ -n \"$SERVER_PASSWORD\" ]; then echo \"-serverpassword=\\\"${SERVER_PASSWORD}\\\"\"; fi) -adminpassword=\"{{ADMIN_PASSWORD}}\" -rcon",
+    "startup": "export HOME=\/home\/container; .\/PalworldServerConfigParser; (while read cmd; do rcon -s -a \"127.0.0.1:{{RCON_PORT}}\" -p \"{{ADMIN_PASSWORD}}\" \"$cmd\";done) < \/dev\/stdin & FEX \/home\/container\/Pal\/Binaries\/Linux\/PalServer-Linux-Shipping Pal -publiclobby {{EXTRA_FLAGS}} -port={{SERVER_PORT}} -publicport={{SERVER_PORT}} -servername=\"{{SERVER_NAME}}\" -players={{MAX_PLAYERS}} $(if [ -n \"$SERVER_PASSWORD\" ]; then echo \"-serverpassword=\\\"${SERVER_PASSWORD}\\\"\"; fi) -adminpassword=\"{{ADMIN_PASSWORD}}\" -rcon",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"Setting breakpad minidump AppID = 2394010\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Running Palworld dedicated server on\"\r\n}",
         "logs": "{}",
         "stop": "shutdown 15"
     },
@@ -44,9 +44,9 @@
         },
         {
             "name": "Auto Update",
-            "description": "Auto update the server on start.\r\n\r\nExperimental! SLOW",
+            "description": "Auto update the server on start.\r\n\r\nExperimental!",
             "env_variable": "AUTO_UPDATE",
-            "default_value": "0",
+            "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
             "rules": "boolean",
@@ -103,12 +103,12 @@
             "field_type": "text"
         },
         {
-            "name": "VALIDATE",
-            "description": "",
+            "name": "Validate",
+            "description": "Enable to validate\/verify the game files each time when starting.\r\nCan be slow.\r\n\r\nUse the Auto Update flag above for updates.",
             "env_variable": "VALIDATE",
             "default_value": "0",
-            "user_viewable": false,
-            "user_editable": false,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "boolean",
             "field_type": "text"
         },
@@ -130,16 +130,6 @@
             "user_viewable": true,
             "user_editable": false,
             "rules": "required|numeric",
-            "field_type": "text"
-        },
-        {
-            "name": "Extra startup flags",
-            "description": "May improve performance",
-            "env_variable": "EXTRA_FLAGS",
-            "default_value": "-useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
