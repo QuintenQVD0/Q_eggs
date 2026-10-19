@@ -15,7 +15,7 @@
         "quintenqvd\/pterodactyl_images:dev_fex_latest": "quintenqvd\/pterodactyl_images:dev_fex_latest"
     },
     "file_denylist": [],
-    "startup": "FEX .\/bedrock_server",
+    "startup": "FEXInterpreter .\/bedrock_server",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"server-name\": \"{{server.build.env.SERVERNAME}}\",\r\n            \"gamemode\": \"{{server.build.env.GAMEMODE}}\",\r\n            \"difficulty\": \"{{server.build.env.DIFFICULTY}}\",\r\n            \"allow-cheats\": \"{{server.build.env.CHEATS}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server started\"\r\n}",
