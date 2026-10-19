@@ -1,0 +1,134 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2026-10-19T01:10:40-04:00",
+    "name": "Don't Starve Together ARM64",
+    "author": "eggs@llama.pet",
+    "description": "Don\u2019t Starve Together is an uncompromising wilderness survival game full of science and magic. Now on arm64!",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "FEX Latest": "quintenqvd\/pterodactyl_images:dev_fex_latest"
+    },
+    "file_denylist": [],
+    "startup": "export HOME=\/home\/container; cd bin64 && coproc caves ( FEX .\/dontstarve_dedicated_server_nullrenderer_x64 -bind_ip 0.0.0.0 -port 11000 -persistent_storage_root \/home\/container\/DoNotStarveTogether -conf_dir config -cluster server -players {{MAX_PLAYERS}} -shard Caves 2>&1 | sed -u 's\/^\/[ CAVES ] \/' >&2 ); caves_pid=$caves_PID; FEX .\/dontstarve_dedicated_server_nullrenderer_x64 -bind_ip 0.0.0.0 -port {{SERVER_PORT}} -persistent_storage_root \/home\/container\/DoNotStarveTogether -conf_dir config -cluster server -players {{MAX_PLAYERS}} -shard Master 2>&1 | sed -u 's\/^\/[ MASTER ] \/' >&2; echo 'c_shutdown()' >&\"${caves[1]}\"; wait \"$caves_PID\"",
+    "config": {
+        "files": "{\r\n    \"DoNotStarveTogether\/config\/server\/cluster.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"GAMEPLAY.game_mode\": \"{{server.build.env.GAME_MODE}}\",\r\n            \"GAMEPLAY.max_players\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"NETWORK.cluster_name\": \"{{server.build.env.CLUSTER_NAME}}\",\r\n            \"NETWORK.cluster_description\": \"{{server.build.env.CLUSTER_DESC}}\",\r\n            \"SHARD.shard_enabled\": \"true\",\r\n            \"SHARD.bind_ip\": \"127.0.0.1\",\r\n            \"SHARD.master_ip\": \"127.0.0.1\",\r\n            \"SHARD.master_port\": \"11001\"\r\n        }\r\n    },\r\n    \"DoNotStarveTogether\/config\/server\/Master\/server.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"NETWORK.server_port\": \"{{server.build.deult.port}}\",\r\n            \"SHARD.is_master\": \"true\"\r\n        }\r\n    },\r\n    \"DoNotStarveTogether\/config\/server\/Caves\/server.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"NETWORK.server_port\": \"11000\",\r\n            \"SHARD.is_master\": \"false\",\r\n            \"SHARD.name\": \"Caves\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": [\r\n        \"Server registered via geo DNS\",\r\n        \"[Shard] secondary shard LUA is now ready!\"\r\n    ]\r\n}",
+        "logs": "{}",
+        "stop": "c_shutdown()"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n## Download SteamCMD\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\n## DST specific\r\n## cluster token file\r\necho -e \"getting cluster configs\"\r\nmkdir -p \/mnt\/server\/DoNotStarveTogether\/config\/server\/\r\nif [ ! -f \/mnt\/server\/DoNotStarveTogether\/config\/server\/cluster_token.txt ]; then\r\n    echo \"${SERVER_TOKEN}\" >> \/mnt\/server\/DoNotStarveTogether\/config\/server\/cluster_token.txt\r\nfi\r\n\r\n## cluster configs \r\nif [ ! -f \/mnt\/server\/DoNotStarveTogether\/config\/server\/cluster.ini ]; then\r\n    curl -sSL https:\/\/raw.githubusercontent.com\/ptero-eggs\/game-eggs\/main\/dont_starve\/server.cluster.ini -o \/mnt\/server\/DoNotStarveTogether\/config\/server\/cluster.ini\r\nfi\r\n\r\n## master configs\r\necho -e \"getting master configs\"\r\nmkdir -p \/mnt\/server\/DoNotStarveTogether\/config\/server\/Master\/\r\n## master ini\r\nif [ ! -f \/mnt\/server\/DoNotStarveTogether\/config\/server\/Master\/server.ini ]; then\r\n    curl -sSL https:\/\/raw.githubusercontent.com\/ptero-eggs\/game-eggs\/main\/dont_starve\/server.master.ini -o \/mnt\/server\/DoNotStarveTogether\/config\/server\/Master\/server.ini\r\nfi\r\n\r\n## master worldgen override\r\nif [ ! -z ${MASTER_WORLDGEN}  ] && [ ! -f \/mnt\/server\/DoNotStarveTogether\/config\/server\/Master\/worldgenoverride.lua ]; then\r\n    curl -sSL ${MASTER_WORLDGEN} -o \/mnt\/server\/DoNotStarveTogether\/config\/server\/Master\/worldgenoverride.lua\r\nfi\r\n\r\n## caves configs\r\necho -e \"getting cave configs\"\r\nmkdir -p \/mnt\/server\/DoNotStarveTogether\/config\/server\/Caves\/\r\n## caves ini\r\nif [ ! -f \/mnt\/server\/DoNotStarveTogether\/config\/server\/Caves\/server.ini ]; then\r\n    curl -sSL https:\/\/raw.githubusercontent.com\/ptero-eggs\/game-eggs\/main\/dont_starve\/server.caves.ini -o \/mnt\/server\/DoNotStarveTogether\/config\/server\/Caves\/server.ini\r\nfi\r\n\r\n## caves worldgen override\r\nif [ ! -z ${CAVES_WORLDGEN} ] && [ ! -f \/mnt\/server\/DoNotStarveTogether\/config\/server\/Caves\/worldgenoverride.lua ]; then\r\n    curl -sSL ${CAVES_WORLDGEN} -o \/mnt\/server\/DoNotStarveTogether\/config\/server\/Caves\/worldgenoverride.lua\r\nfi\r\n\r\necho -e \"\\nFinished Preinstallation. Add your FEX mount now if you have one, and start the server.\\n\"",
+            "container": "quintenqvd\/pterodactyl_images:installer_steamcmd",
+            "entrypoint": "\/bin\/bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Max Players",
+            "description": "Set the maximum number of players that will be allowed to join the game. This option overrides the [GAMEPLAY] \/ max_players setting in cluster.ini.\r\n\r\nDefault is 16",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "16",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:1,64",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Token",
+            "description": "Required to run a public server. This can be generated from the Klei Accounts page at:\r\nhttps:\/\/accounts.klei.com\/account\/game\/servers?game=DontStarveTogether\r\n\r\n\r\n\r\nAlternatively, can be generated through the in-game terminal with: \r\nTheNet:GenerateClusterToken()",
+            "env_variable": "SERVER_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "App ID",
+            "description": "Steam Server App ID",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "343050",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in: 343050",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto-update server",
+            "description": "Checks for any server updates on startup, and updates if necessary. \r\n\r\n(1 Enable | 0 Disable)",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Game mode",
+            "description": "Valid values are survival, endless or wilderness",
+            "env_variable": "GAME_MODE",
+            "default_value": "survival",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Cluster Name",
+            "description": "This is the name that will show up in server browser.",
+            "env_variable": "CLUSTER_NAME",
+            "default_value": "A Pterodactyl ARM64 Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Cluster Description",
+            "description": "This will show up in the server details area on the \u201cBrowse Games\u201d screen.",
+            "env_variable": "CLUSTER_DESC",
+            "default_value": "A Pterodactyl ARM64 Hosted Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Master Worldgen Override",
+            "description": "Link to the lua file used to generate the master server map. Only used during the install phase.",
+            "env_variable": "MASTER_WORLDGEN",
+            "default_value": "https:\/\/raw.githubusercontent.com\/ptero-eggs\/game-eggs\/main\/dont_starve\/worldgenoverride.master.lua",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Caves Worldgen Override",
+            "description": "Link to the lua file used to generate the caves server map. Only used during the install phase.\r\n\r\nDefault generates a cave map",
+            "env_variable": "CAVES_WORLDGEN",
+            "default_value": "https:\/\/raw.githubusercontent.com\/ptero-eggs\/game-eggs\/main\/dont_starve\/worldgenoverride.caves.lua",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "FEX_ROOTFS_PATH",
+            "description": "If you want a custom (mounted) fex RootFS\r\nMust end in a \/\r\nExample: \/fex\/",
+            "env_variable": "FEX_ROOTFS_PATH",
+            "default_value": "\/fex\/",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "nullable|string|max:32",
+            "field_type": "text"
+        }
+    ]
+}
