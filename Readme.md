@@ -60,7 +60,7 @@ A curated collection of ARM64-compatible eggs for Pterodactyl Panel, with specia
 ### D
 | Service | File | AMD64 | ARM64 | Oracle ARM | Requirements | Notes |
 |---------|------|-------|-------|------------|-------------|-------|
-| Don't Starve Together | egg-don-t-starve-together-a-r-m64.json | ❌ | ❔ | ✅ | 🎮 🖥️ |  |
+| Don't Starve Together | egg-don-t-starve-together-a-r-m64.json | ❌ | ✅ | ✅ | 🎮 🖥️ |  |
 
 ### E
 | Service | File | AMD64 | ARM64 | Oracle ARM | Requirements | Notes |
