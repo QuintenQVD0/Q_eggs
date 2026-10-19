@@ -44,9 +44,9 @@
         },
         {
             "name": "Auto Update",
-            "description": "Auto update the server on start.\r\n\r\nExperimental! SLOW",
+            "description": "Auto update the server on start.\r\n\r\nExperimental!",
             "env_variable": "AUTO_UPDATE",
-            "default_value": "0",
+            "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
             "rules": "boolean",
@@ -103,12 +103,12 @@
             "field_type": "text"
         },
         {
-            "name": "VALIDATE",
-            "description": "",
+            "name": "Validate",
+            "description": "Enable to validate\/verify the game files each time when starting.\r\nCan be slow.\r\n\r\nUse the Auto Update flag above for updates.",
             "env_variable": "VALIDATE",
             "default_value": "0",
-            "user_viewable": false,
-            "user_editable": false,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "boolean",
             "field_type": "text"
         },
