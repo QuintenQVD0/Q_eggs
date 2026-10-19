@@ -15,7 +15,7 @@
         "quintenqvd\/pterodactyl_images:fex_proton_latest": "quintenqvd\/pterodactyl_images:fex_proton_latest"
     },
     "file_denylist": [],
-    "startup": "export XDG_RUNTIME_DIR=\"\/home\/container\"; cd \/home\/container\/AbioticFactor\/Binaries\/Win64; export HOME=\/home\/container; FEXInterpreter \/usr\/local\/bin\/proton run .\/AbioticFactorServer-Win64-Shipping.exe -log -useperfthreads -NoAsyncLoadingThread -MaxServerPlayers=${NUM_PLAYERS} -PORT=${SERVER_PORT} -QueryPort=${QUERY_PORT} -ServerPassword=\"${SERVER_PASSWORD}\" -SteamServerName=\"${SERVER_NAME}\" & AF_PID=$!; tail -c0 -F \/home\/container\/AbioticFactor\/Saved\/Logs\/AbioticFactor.log --pid=$AF_PID",
+    "startup": "export XDG_RUNTIME_DIR=\"\/home\/container\"; cd \/home\/container\/AbioticFactor\/Binaries\/Win64; export HOME=\/home\/container; FEX \/usr\/local\/bin\/proton run .\/AbioticFactorServer-Win64-Shipping.exe -log -useperfthreads -NoAsyncLoadingThread -MaxServerPlayers=${NUM_PLAYERS} -PORT=${SERVER_PORT} -QueryPort=${QUERY_PORT} -ServerPassword=\"${SERVER_PASSWORD}\" -SteamServerName=\"${SERVER_NAME}\" & AF_PID=$!; tail -c0 -F \/home\/container\/AbioticFactor\/Saved\/Logs\/AbioticFactor.log --pid=$AF_PID",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"LogInit: Display: Engine is initialized.\"\r\n}",
